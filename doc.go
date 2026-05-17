@@ -1,3 +1,18 @@
+// doc.go — canonical package documentation (package tieredcache, github.com/ubgo/cache-tiered).
+//
+// Package role: this file is the authoritative overview for the ubgo/cache
+// tiered composer; start here before reading tiered.go (the implementation).
+//
+// This file: holds ONLY the package doc comment below — no code. It explains
+// the read path (probe L1→Ln, promote first hit upward) and write path
+// (write-through, L1 error authoritative, deeper-tier errors best-effort) and
+// the design invariants (panic-if-no-L1, 1-based per-tier TTL, invalidation
+// goroutine touches only L1) that tiered.go implements.
+//
+// AI-context: the // Package … block below is the godoc package doc; do not
+// duplicate it (revive flags duplicate package comments). The blank line
+// after this header keeps it a file header, not a second package comment.
+
 // Package tieredcache composes several cache.Cache backends into an L1/L2(/L3)
 // hierarchy and is itself a cache.Cache, so callers see no difference.
 //

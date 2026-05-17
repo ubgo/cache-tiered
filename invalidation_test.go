@@ -1,3 +1,5 @@
+// invalidation_test.go — tests for cross-process invalidation (peer Del drops local L1, InvalidateAll flushes L1, local Del propagates to peer).
+
 package tieredcache_test
 
 import (

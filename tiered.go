@@ -1,3 +1,25 @@
+// tiered.go — the L1/L2/L3 cache.Cache composer (package tieredcache, github.com/ubgo/cache-tiered).
+//
+// Package role: tieredcache composes several cache.Cache backends into an
+// L1/L2(/L3) hierarchy and is itself a cache.Cache, so callers see no
+// difference. See doc.go for the package overview and invariants.
+//
+// This file: defines WriteMode, Cache, the options (WithL1..WithL3,
+// WithPerTierTTL, WithWriteMode, WithInvalidation), New, every cache.Cache
+// method, and the helpers fanout/ttlFor/mirrorCounter/publishInval.
+// Invariants an AI must keep: tiers[0] is L1 and is authoritative for the
+// write error and for atomic ops (SetNX/Incr/Decr) — deeper-tier write and
+// promote errors are intentionally swallowed (best-effort); a read promotes
+// the first hit into every shallower tier using the destination tier's TTL;
+// a non-ErrNotFound read error aborts the probe (an outage must not look like
+// a miss); WithPerTierTTL is 1-based while tier slices are 0-based and ttlFor
+// bridges them; the invalidation Subscribe goroutine only ever mutates L1 and
+// Close cancels it and invWG.Wait()s before closing tiers.
+//
+// AI-context: composer-of-cache.Cache; New panics if no L1 is configured —
+// a tiered cache without its hot tier is always a wiring bug surfaced at
+// startup, never softened to a runtime error.
+
 package tieredcache
 
 import (

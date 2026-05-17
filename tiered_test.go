@@ -1,3 +1,5 @@
+// tiered_test.go — tests for the tiered composer (conformance L1-only & L1+L2, read promotion, write-through, WriteOnlyL1, per-tier TTL).
+
 package tieredcache_test
 
 import (
