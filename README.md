@@ -4,6 +4,8 @@ Multi-tier (L1/L2/L3) cache composer for Go. It wraps several [`github.com/ubgo/
 
 If you searched for "Go multi-level cache", "L1 L2 cache library Golang", "in-memory + Redis tiered cache Go", or "read-through cache promotion Go" — this is the tiered composer of the `ubgo/cache` family. It passes the shared `cachetest.Run` conformance suite.
 
+> **Documentation:** a full per-feature cookbook with use cases and runnable snippets for every option and the read/write/cascade semantics lives in [`docs/README.md`](docs/README.md).
+
 ## Why a tiered cache
 
 A single in-memory cache is fast but per-process and lost on restart. A single Redis/Postgres cache is shared and durable but every read is a network round trip. A tiered cache gives you both: a nanosecond-latency local **L1** in front of a shared **L2** (and optionally a durable **L3**), with automatic promotion so hot keys stay local — and cross-process invalidation so a long L1 TTL never serves stale data after a peer mutates a key.
