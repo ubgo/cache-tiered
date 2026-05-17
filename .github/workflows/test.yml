@@ -17,18 +17,12 @@ jobs:
         with:
           go-version: "1.24"
           cache: true
-      # Depends on sibling modules until they are tagged.
-      - name: checkout ubgo/cache sibling
-        uses: actions/checkout@v6
-        with:
-          repository: ubgo/cache
-          path: ../cache
-      - name: checkout ubgo/cache-mem sibling
-        uses: actions/checkout@v6
-        with:
-          repository: ubgo/cache-mem
-          path: ../cache-mem
+      # Cross-module deps (github.com/ubgo/cache, ...) resolve from their
+      # published pseudo-versions via the default module proxy — no sibling
+      # checkout or replace directive needed.
       - name: vet
         run: go vet ./...
+      - name: gofmt
+        run: test -z "$(gofmt -l .)"
       - name: test (race + coverage)
         run: go test -race -count=2 -coverprofile=cover.out ./...
