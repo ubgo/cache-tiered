@@ -1,6 +1,8 @@
 # ubgo/cache-tiered — tiered L1/L2/L3 cache for Go
 
-![coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
+
+[![Go Reference](https://pkg.go.dev/badge/github.com/ubgo/cache-tiered.svg)](https://pkg.go.dev/github.com/ubgo/cache-tiered) [![Go Report Card](https://goreportcard.com/badge/github.com/ubgo/cache-tiered)](https://goreportcard.com/report/github.com/ubgo/cache-tiered) [![test](https://github.com/ubgo/cache-tiered/actions/workflows/test.yml/badge.svg)](https://github.com/ubgo/cache-tiered/actions/workflows/test.yml) [![lint](https://github.com/ubgo/cache-tiered/actions/workflows/lint.yml/badge.svg)](https://github.com/ubgo/cache-tiered/actions/workflows/lint.yml) ![coverage](https://img.shields.io/badge/coverage-100%25-brightgreen) [![tag](https://img.shields.io/github/v/tag/ubgo/cache-tiered?sort=semver)](https://github.com/ubgo/cache-tiered/tags) [![license](https://img.shields.io/badge/license-source--available-blue)](./LICENSE) ![Go](https://img.shields.io/badge/go-1.24-00ADD8?logo=go)
+
 
 Multi-tier (L1/L2/L3) cache composer for Go. It wraps several [`github.com/ubgo/cache`](https://github.com/ubgo/cache) backends into one cache that probes them fastest-first, promotes hits upward, writes through, and stays coherent across processes via a pluggable invalidation bus — and is itself a `cache.Cache`, so callers see no difference.
 
