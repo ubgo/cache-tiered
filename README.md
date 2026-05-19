@@ -1,5 +1,7 @@
 # ubgo/cache-tiered — tiered L1/L2/L3 cache for Go
 
+![coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
+
 Multi-tier (L1/L2/L3) cache composer for Go. It wraps several [`github.com/ubgo/cache`](https://github.com/ubgo/cache) backends into one cache that probes them fastest-first, promotes hits upward, writes through, and stays coherent across processes via a pluggable invalidation bus — and is itself a `cache.Cache`, so callers see no difference.
 
 If you searched for "Go multi-level cache", "L1 L2 cache library Golang", "in-memory + Redis tiered cache Go", or "read-through cache promotion Go" — this is the tiered composer of the `ubgo/cache` family. It passes the shared `cachetest.Run` conformance suite.
